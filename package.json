@@ -1,8 +1,20 @@
 {
   "name": "vue-password-toggle",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
+  "author": {
+    "name": "De Long Iu",
+    "email": "mail@delong-iu.de"
+  },
+  "keywords": [
+    "vue.js",
+    "password",
+    "vue.js component",
+    "show password"
+  ],
+  "description": "A simple lightweight component to show and hide the password input.",
+  "main": "src/main.js",
+  "repository": "Dr4gon/vue-password-toggle",
+  "license": "MIT",
   "scripts": {
     "dev": "vite  --host 0.0.0.0",
     "build": "vite build",
