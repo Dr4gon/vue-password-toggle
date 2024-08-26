@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'PasswordToggle',
   data() {
     return {
       passwordFieldType: 'password'
