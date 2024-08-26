@@ -22,6 +22,7 @@ export default {
 
 <template>
   <header>
+    <!-- Replace this stylesheet with bootstrap or whatever you like to adjust styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 
     <div class="wrapper">
