@@ -1,6 +1,16 @@
 {
   "name": "vue-password-toggle",
   "version": "1.0.1",
+  "type": "module",
+  "files": ["dist"],
+  "main": "src/lib/main.js",
+  "exports":{
+    ".": {
+      "import": "./dist/password-toggle.js",
+      "require": "./dist/password-toggle.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
   "author": {
     "name": "De Long Iu",
     "email": "mail@delong-iu.de"
@@ -12,7 +22,6 @@
     "show password"
   ],
   "description": "A simple lightweight component to show and hide the password input.",
-  "main": "src/main.js",
   "repository": "Dr4gon/vue-password-toggle",
   "license": "MIT",
   "scripts": {
