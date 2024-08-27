@@ -1,5 +1,5 @@
 <script>
-import PasswordToggle from './PasswordToggle.vue'
+import PasswordToggle from './lib/PasswordToggle.vue'
 
 export default {
   name: 'App',
