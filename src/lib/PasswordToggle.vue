@@ -56,6 +56,6 @@ export default {
   width: 100%;
 }
 .pw-toggle-btn {
-  margin-bottom: var(--pico-spacing); /** Adjust to the input field pico style */
+  margin-bottom: 1rem;
 }
 </style>
