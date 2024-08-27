@@ -2,6 +2,10 @@
 
 A simple lightweight component to show and hide the password input.
 
+## Demo
+
+![Alt Text](demo.gif)
+
 ## Status
 
 - [x] Configure build process so dependency can be used
