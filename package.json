@@ -6,8 +6,8 @@
   "main": "src/lib/main.js",
   "exports":{
     ".": {
-      "import": "./dist/password-toggle.js",
-      "require": "./dist/password-toggle.js"
+      "import": "./dist/vue-password-toggle.js",
+      "require": "./dist/vue-password-toggle.js"
     },
     "./dist/style.css": "./dist/style.css"
   },
