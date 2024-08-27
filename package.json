@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "type": "module",
   "files": ["dist"],
-  "main": "src/lib/main.js",
+  "main": "./dist/vue-password-toggle.umd.cjs",
+  "module": "./dist/vue-password-toggle.js",
   "exports":{
     ".": {
       "import": "./dist/vue-password-toggle.js",
