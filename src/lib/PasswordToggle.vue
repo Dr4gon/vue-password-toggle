@@ -3,12 +3,37 @@ export default {
   name: 'PasswordToggle',
   data() {
     return {
-      passwordFieldType: 'password'
+      passwordFieldType: 'password',
+      passwordRequirements: []
     }
   },
   methods: {
     togglePasswordVisibility() {
       this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+    },
+    validate(password) {
+      this.passwordRequirements = [
+        {
+          name: 'At least 8 characters',
+          predicate: password.length >= 8
+        },
+        {
+          name: 'At least one uppercase letter',
+          predicate: /[A-Z]/.test(password)
+        },
+        {
+          name: 'At least one lowercase letter',
+          predicate: /[a-z]/.test(password)
+        },
+        {
+          name: 'At least one number',
+          predicate: /\d/.test(password)
+        },
+        {
+          name: 'At least one special character',
+          predicate: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)
+        }
+      ]
     }
   },
   props: {
@@ -28,6 +53,7 @@ export default {
       :type="this.passwordFieldType"
       :value="this.password"
       @input="$emit('update:password', $event.target.value)"
+      @change="validate(this.password)"
       placeholder="Password"
       required
     />
@@ -48,6 +74,15 @@ export default {
       />
     </button>
   </div>
+  <ul class="requirements">
+    <li
+      v-for="(requirement, key) in passwordRequirements"
+      :key="key"
+      :class="requirement.predicate ? 'is-success' : 'is-error'"
+    >
+      {{ requirement.name }}
+    </li>
+  </ul>
 </template>
 
 <style scoped>
@@ -57,5 +92,16 @@ export default {
 }
 .pw-toggle-btn {
   margin-bottom: 1rem;
+}
+.requirements {
+  font-weight: bold;
+}
+
+.is-success {
+  color: #96ca2d;
+}
+
+.is-error {
+  color: #ba3637;
 }
 </style>
