@@ -11,6 +11,10 @@ export default {
     togglePasswordVisibility() {
       this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
     },
+    update(newValue) {
+      this.$emit('update:password', newValue)
+      this.validate(newValue)
+    },
     validate(password) {
       this.passwordRequirements = [
         {
@@ -52,8 +56,7 @@ export default {
       class="password"
       :type="this.passwordFieldType"
       :value="this.password"
-      @input="$emit('update:password', $event.target.value)"
-      @change="validate(this.password)"
+      @input="update($event.target.value)"
       placeholder="Password"
       required
     />
