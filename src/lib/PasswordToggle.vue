@@ -16,6 +16,7 @@ export default {
       this.validate(newValue)
     },
     validate(password) {
+      // idea inspired by https://dev.to/thormeier/use-all-the-features-how-to-create-a-fancy-password-input-with-vue3-ggi
       this.passwordRequirements = [
         {
           name: 'At least 8 characters',
