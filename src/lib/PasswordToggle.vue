@@ -16,6 +16,12 @@ export default {
       this.validate(newValue)
     },
     validate(password) {
+      if (password === '') {
+        // clear validation messages if password is empty
+        this.passwordRequirements = []
+        return
+      }
+
       // idea inspired by https://dev.to/thormeier/use-all-the-features-how-to-create-a-fancy-password-input-with-vue3-ggi
       this.passwordRequirements = [
         {
