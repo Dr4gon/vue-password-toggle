@@ -25,8 +25,8 @@ export default {
       // idea inspired by https://dev.to/thormeier/use-all-the-features-how-to-create-a-fancy-password-input-with-vue3-ggi
       this.passwordRequirements = [
         {
-          name: 'At least 8 characters',
-          predicate: password.length >= 8
+          name: 'At least ' + this.minPasswordLength + ' characters',
+          predicate: password.length >= this.minPasswordLength
         },
         {
           name: 'At least one uppercase letter',
@@ -51,6 +51,11 @@ export default {
     password: {
       type: String,
       required: true
+    },
+    minPasswordLength: {
+      type: Number,
+      default: 8,
+      required: false
     }
   },
   emits: ['update:password'] // needed to update the parent's password

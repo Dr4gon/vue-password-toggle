@@ -26,7 +26,11 @@ export default {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 
     <div class="wrapper">
-      <PasswordToggle v-model:password="password" v-on:keydown.enter="doLogin($event)" />
+      <PasswordToggle
+        v-model:password="password"
+        v-on:keydown.enter="doLogin($event)"
+        min-password-length="9"
+      />
     </div>
   </header>
 </template>
