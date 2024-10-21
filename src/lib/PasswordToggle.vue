@@ -4,7 +4,8 @@ export default {
   data() {
     return {
       passwordFieldType: 'password',
-      passwordRequirements: []
+      passwordRequirements: [],
+      passwordValid: false
     }
   },
   methods: {
@@ -51,6 +52,9 @@ export default {
           predicate: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)
         })
       }
+
+      this.passwordValid = this.passwordRequirements.every((requirement) => requirement.predicate)
+      this.$emit('passwordValid', this.passwordValid)
     }
   },
   props: {
@@ -84,7 +88,7 @@ export default {
       required: false
     }
   },
-  emits: ['update:password'] // needed to update the parent's password
+  emits: ['update:password', 'update:passwordValid'] // needed to update the parent's values
 }
 </script>
 
