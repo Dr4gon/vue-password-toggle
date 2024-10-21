@@ -16,35 +16,41 @@ export default {
       this.validate(newValue)
     },
     validate(password) {
-      if (password === '') {
-        // clear validation messages if password is empty
-        this.passwordRequirements = []
-        return
-      }
+      this.passwordRequirements = [] // always clear before adding new requirements
 
       // idea inspired by https://dev.to/thormeier/use-all-the-features-how-to-create-a-fancy-password-input-with-vue3-ggi
-      this.passwordRequirements = [
-        {
-          name: 'At least ' + this.minPasswordLength + ' characters',
-          predicate: password.length >= this.minPasswordLength
-        },
-        {
+      this.passwordRequirements.push({
+        name: 'At least ' + this.minPasswordLength + ' characters',
+        predicate: password.length >= this.minPasswordLength
+      })
+
+      if (this.minOneUpperLetter) {
+        this.passwordRequirements.push({
           name: 'At least one uppercase letter',
           predicate: /[A-Z]/.test(password)
-        },
-        {
+        })
+      }
+
+      if (this.minOneLowerLetter) {
+        this.passwordRequirements.push({
           name: 'At least one lowercase letter',
           predicate: /[a-z]/.test(password)
-        },
-        {
+        })
+      }
+
+      if (this.minOneNumber) {
+        this.passwordRequirements.push({
           name: 'At least one number',
           predicate: /\d/.test(password)
-        },
-        {
+        })
+      }
+
+      if (this.minOneSpecialCharacter) {
+        this.passwordRequirements.push({
           name: 'At least one special character',
           predicate: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)
-        }
-      ]
+        })
+      }
     }
   },
   props: {
@@ -55,6 +61,26 @@ export default {
     minPasswordLength: {
       type: Number,
       default: 8,
+      required: false
+    },
+    minOneUpperLetter: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    minOneLowerLetter: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    minOneNumber: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    minOneSpecialCharacter: {
+      type: Boolean,
+      default: false,
       required: false
     }
   },

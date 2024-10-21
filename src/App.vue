@@ -30,6 +30,10 @@ export default {
         v-model:password="password"
         v-on:keydown.enter="doLogin($event)"
         min-password-length="9"
+        minOneLowerLetter="true"
+        minOneUpperLetter="true"
+        minOneNumber="true"
+        minOneSpecialCharacter="true"
       />
     </div>
   </header>
