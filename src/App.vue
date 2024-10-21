@@ -29,7 +29,7 @@ export default {
       <PasswordToggle
         v-model:password="password"
         v-on:keydown.enter="doLogin($event)"
-        min-password-length="9"
+        minPasswordLength="9"
         minOneLowerLetter="true"
         minOneUpperLetter="true"
         minOneNumber="true"
