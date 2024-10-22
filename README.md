@@ -37,7 +37,7 @@ Current recommendation is [overwriting the default keyboard enter behaviour](htt
 
 ![Validation example](demo-validation.gif)
 
-At the moment only the password length of default 8 is automatically activated. The result of the validation is transported with a `passwordValid` emit The rest of the option are:
+At the moment only the password length of default 8 is automatically activated. The result of the validation is transported with a `passwordValid` emit to the parent. The rest of the options are:
 
 | Parameter         | Type | Required |
 | :---------------- | :------: | ----: |
