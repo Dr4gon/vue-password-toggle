@@ -37,7 +37,6 @@ export default {
         v-model:password="password"
         @passwordValid="this.passwordValid = $event"
         @keydownEnter="this.doLogin($event)"
-        :minPasswordLength="9"
         :minOneLowerLetter="true"
         :minOneUpperLetter="true"
         :minOneNumber="true"
