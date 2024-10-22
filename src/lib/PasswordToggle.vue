@@ -88,7 +88,7 @@ export default {
       required: false
     }
   },
-  emits: ['update:password', 'update:passwordValid'] // needed to update the parent's values
+  emits: ['update:password', 'passwordValid'] // needed to update the parent's values
 }
 </script>
 
