@@ -3,21 +3,92 @@ export default {
   name: 'PasswordToggle',
   data() {
     return {
-      passwordFieldType: 'password'
+      passwordFieldType: 'password',
+      passwordRequirements: [],
+      passwordValid: false
     }
   },
   methods: {
     togglePasswordVisibility() {
       this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+    },
+    update(newValue) {
+      this.$emit('update:password', newValue)
+      this.validate(newValue)
+    },
+    validate(password) {
+      this.passwordRequirements = [] // always clear before adding new requirements
+
+      // idea inspired by https://dev.to/thormeier/use-all-the-features-how-to-create-a-fancy-password-input-with-vue3-ggi
+      this.passwordRequirements.push({
+        name: 'At least ' + this.minPasswordLength + ' characters',
+        predicate: password.length >= this.minPasswordLength
+      })
+
+      if (this.minOneUpperLetter) {
+        this.passwordRequirements.push({
+          name: 'At least one uppercase letter',
+          predicate: /[A-Z]/.test(password)
+        })
+      }
+
+      if (this.minOneLowerLetter) {
+        this.passwordRequirements.push({
+          name: 'At least one lowercase letter',
+          predicate: /[a-z]/.test(password)
+        })
+      }
+
+      if (this.minOneNumber) {
+        this.passwordRequirements.push({
+          name: 'At least one number',
+          predicate: /\d/.test(password)
+        })
+      }
+
+      if (this.minOneSpecialCharacter) {
+        this.passwordRequirements.push({
+          name: 'At least one special character',
+          predicate: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)
+        })
+      }
+
+      this.passwordValid = this.passwordRequirements.every((requirement) => requirement.predicate)
+      this.$emit('passwordValid', this.passwordValid)
     }
   },
   props: {
     password: {
       type: String,
       required: true
+    },
+    minPasswordLength: {
+      type: Number,
+      default: 8,
+      required: false
+    },
+    minOneUpperLetter: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    minOneLowerLetter: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    minOneNumber: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    minOneSpecialCharacter: {
+      type: Boolean,
+      default: false,
+      required: false
     }
   },
-  emits: ['update:password'] // needed to update the parent's password
+  emits: ['update:password', 'passwordValid', 'keydownEnter'] // sending the emits to the parent component
 }
 </script>
 
@@ -27,7 +98,8 @@ export default {
       class="password"
       :type="this.passwordFieldType"
       :value="this.password"
-      @input="$emit('update:password', $event.target.value)"
+      @input="update($event.target.value)"
+      @keydown.enter="this.$emit('keydownEnter', $event)"
       placeholder="Password"
       required
     />
@@ -48,6 +120,15 @@ export default {
       />
     </button>
   </div>
+  <ul class="requirements">
+    <li
+      v-for="(requirement, key) in passwordRequirements"
+      :key="key"
+      :class="requirement.predicate ? 'is-success' : 'is-error'"
+    >
+      {{ requirement.name }}
+    </li>
+  </ul>
 </template>
 
 <style scoped>
@@ -57,5 +138,16 @@ export default {
 }
 .pw-toggle-btn {
   margin-bottom: 1rem;
+}
+.requirements {
+  font-weight: bold;
+}
+
+.is-success {
+  color: #96ca2d;
+}
+
+.is-error {
+  color: #ba3637;
 }
 </style>

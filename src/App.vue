@@ -8,13 +8,19 @@ export default {
   },
   data() {
     return {
-      password: ''
+      password: '',
+      passwordValid: false
     }
   },
   methods: {
     doLogin(event) {
       event.preventDefault()
-      console.log('doLogin', event)
+
+      if (this.passwordValid) {
+        console.log('doLogin', event)
+      } else {
+        console.log('Password is not valid')
+      }
     }
   }
 }
@@ -26,7 +32,16 @@ export default {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 
     <div class="wrapper">
-      <PasswordToggle v-model:password="password" v-on:keydown.enter="doLogin($event)" />
+      <!-- https://vueschool.io/articles/vuejs-tutorials/techniques-for-sharing-data-between-vue-js-components/ -->
+      <PasswordToggle
+        v-model:password="password"
+        @passwordValid="this.passwordValid = $event"
+        @keydownEnter="this.doLogin($event)"
+        :minOneLowerLetter="true"
+        :minOneUpperLetter="true"
+        :minOneNumber="true"
+        :minOneSpecialCharacter="true"
+      />
     </div>
   </header>
 </template>
