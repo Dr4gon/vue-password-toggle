@@ -88,7 +88,7 @@ export default {
       required: false
     }
   },
-  emits: ['update:password', 'passwordValid'] // needed to update the parent's values
+  emits: ['update:password', 'passwordValid', 'keydownEnter'] // sending the emits to the parent component
 }
 </script>
 
@@ -99,6 +99,7 @@ export default {
       :type="this.passwordFieldType"
       :value="this.password"
       @input="update($event.target.value)"
+      @keydown.enter="this.$emit('keydownEnter', $event)"
       placeholder="Password"
       required
     />

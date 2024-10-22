@@ -41,7 +41,7 @@ export default {
             this.passwordValid = payload
           }
         "
-        v-on:keydown.enter="this.doLogin($event)"
+        @keydownEnter="this.doLogin($event)"
         :minPasswordLength="9"
         :minOneLowerLetter="true"
         :minOneUpperLetter="true"
