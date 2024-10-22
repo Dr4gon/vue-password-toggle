@@ -23,13 +23,42 @@ and integrating it directly into your .vue file:
 </script>
 ```
 
-Current recommendation is [overwriting the default keyboard enter behaviour](https://v2.vuejs.org/v2/guide/events?#Key-Modifiers) by hand and use a [vue.js two way data binding](https://learnvue.co/articles/v-model-guide).
+Current recommendation is [overwriting the default keyboard enter behaviour](https://v2.vuejs.org/v2/guide/events?#Key-Modifiers) by using the integrated emit option and use a [vue.js two way data binding](https://learnvue.co/articles/v-model-guide). 
 
 ```js
 <template>
-  <PasswordToggle v-model:password="password" v-on:keydown.enter="doLogin($event)" />
+  <PasswordToggle 
+  v-model:password="password" 
+  @keydownEnter="doLogin($event)"/>
 </template>
 ```
+
+## Validation
+
+At the moment only the password length of default 8 is automatically activated. The result of the validation is transported with a `passwordValid` emit The rest of the option are:
+
+| Parameter         | Type | Required |
+| :---------------- | :------: | ----: |
+| minPasswordLength |   Number   | No |
+| minOneLowerLetter |   Boolean   | No |
+| minOneUpperLetter |  Boolean   | No |
+| minOneNumber      |  Boolean | No |
+| minOneSpecialCharacter |  Boolean   | No |
+
+and can be added like this.
+
+```js
+<template>
+  <PasswordToggle 
+  v-model:password="password" 
+  @keydownEnter="doLogin($event)" 
+  @passwordValid="this.passwordValid = $event" 
+  :minOneUpperLetter="true" 
+  :minPasswordLength="10"/>
+</template>
+```
+
+## Example Code
 
 Full working code example based on the vue.js generated template app included in the [repository](https://github.com/Dr4gon/vue-password-toggle).
 
@@ -49,6 +78,7 @@ Any kind of requests, bugs, and so on and so forth, [write a ticket](https://git
 
 - [x] Configure build process so dependency can be used
 - [x] Write proper docu
+- [x] Add validation of password
 - [ ] Clean out code
 - [ ] Remove unused dependencies
 - [ ] Add color options

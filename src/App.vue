@@ -35,12 +35,7 @@ export default {
       <!-- https://vueschool.io/articles/vuejs-tutorials/techniques-for-sharing-data-between-vue-js-components/ -->
       <PasswordToggle
         v-model:password="password"
-        @passwordValid="
-          (payload) => {
-            console.log('passwordValid', payload)
-            this.passwordValid = payload
-          }
-        "
+        @passwordValid="this.passwordValid = $event"
         @keydownEnter="this.doLogin($event)"
         :minPasswordLength="9"
         :minOneLowerLetter="true"
