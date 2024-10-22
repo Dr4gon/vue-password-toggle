@@ -42,11 +42,11 @@ export default {
           }
         "
         v-on:keydown.enter="this.doLogin($event)"
-        minPasswordLength="9"
-        minOneLowerLetter="true"
-        minOneUpperLetter="true"
-        minOneNumber="true"
-        minOneSpecialCharacter="true"
+        :minPasswordLength="9"
+        :minOneLowerLetter="true"
+        :minOneUpperLetter="true"
+        :minOneNumber="true"
+        :minOneSpecialCharacter="true"
       />
     </div>
   </header>
