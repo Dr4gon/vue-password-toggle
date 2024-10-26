@@ -20,10 +20,12 @@ export default {
       this.passwordRequirements = [] // always clear before adding new requirements
 
       // idea inspired by https://dev.to/thormeier/use-all-the-features-how-to-create-a-fancy-password-input-with-vue3-ggi
-      this.passwordRequirements.push({
-        name: 'At least ' + this.minPasswordLength + ' characters',
-        predicate: password.length >= this.minPasswordLength
-      })
+      if (this.minPasswordLength > 0) {
+        this.passwordRequirements.push({
+          name: 'At least ' + this.minPasswordLength + ' characters',
+          predicate: password.length >= this.minPasswordLength
+        })
+      }
 
       if (this.minOneUpperLetter) {
         this.passwordRequirements.push({
@@ -64,7 +66,6 @@ export default {
     },
     minPasswordLength: {
       type: Number,
-      default: 8,
       required: false
     },
     minOneUpperLetter: {
